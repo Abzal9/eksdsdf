@@ -109,7 +109,20 @@
     </nav>
     <div id="about" class="container">
         <h2 class="section-title">About the Tracker</h2>
-        <p>Managing finances can often feel overwhelming, but it doesn't have to be. This tool is designed to provide a simple and intuitive way to keep track of your income and expenses, helping you make informed decisions about your financial future. Whether you're saving for a rainy day or working towards a specific goal, our tracker is here to support you every step of the way. Stay in control of your finances and set yourself up for financial success!</p>
+        <p>Understanding personal finances and managing them effectively is essential to achieving long-term financial stability. Many people struggle with budgeting, saving, and investing, but these challenges can be overcome with knowledge and a strategic approach.</p>
+        <p><strong>Why Financial Literacy Matters:</strong></p>
+        <p>Financial literacy is the ability to understand and effectively manage your personal finances. It's about making informed decisions that help you achieve your financial goals, from managing daily expenses to planning for the future. Good financial management includes budgeting, saving, investing, and understanding debt and credit. When you are financially literate, you can avoid pitfalls like living paycheck to paycheck, accumulating excessive debt, and missing out on opportunities for growth.</p>
+        
+        <p><strong>Steps to Manage Your Finances Wisely:</strong></p>
+        <ul>
+            <li><strong>Create a Budget:</strong> Track your income and expenses to ensure that you're spending less than you earn. Use this insight to adjust your habits and make conscious choices about your spending.</li>
+            <li><strong>Set Financial Goals:</strong> Having clear goals is crucial for motivation. Whether it’s saving for a vacation, buying a home, or preparing for retirement, knowing what you’re working towards helps you stay focused.</li>
+            <li><strong>Build an Emergency Fund:</strong> Life is unpredictable. Building a safety net with 3-6 months of living expenses can help you avoid financial strain in case of emergencies like job loss or unexpected medical costs.</li>
+            <li><strong>Save and Invest:</strong> Start saving early and invest in tools like retirement accounts or investment portfolios. The earlier you start, the more your money can grow thanks to compound interest.</li>
+            <li><strong>Manage Debt:</strong> Avoid accumulating high-interest debt, such as credit card debt. If you have existing debts, prioritize paying them off, especially those with the highest interest rates.</li>
+            <li><strong>Regular Financial Check-ups:</strong> Track your financial progress regularly. This allows you to adjust your budget, reassess your savings goals, and ensure that you’re on the right path.</li>
+        </ul>
+        <p>By following these basic principles, you can set yourself up for long-term financial health and stability. This tracker will help you stay organized, track your expenses, and monitor your progress as you work toward achieving your goals.</p>
     </div>
     <div id="features" class="container">
         <h2 class="section-title">Features</h2>
@@ -171,21 +184,4 @@
         document.getElementById('financeForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const income = parseFloat(document.getElementById('income').value);
-            const expenses = parseFloat(document.getElementById('expenses').value);
-            const savings = parseFloat(document.getElementById('savings').value);
-            const balance = income - expenses;
-            const resultElement = document.getElementById('result');
-            
-            let savingsLeft = savings - balance;
-
-            if (balance > 0) {
-                resultElement.textContent = `Great! You have a positive balance of $${balance.toFixed(2)}. You are on track to reach your savings goal with $${savingsLeft.toFixed(2)} remaining.`;
-            } else if (balance === 0) {
-                resultElement.textContent = 'You broke even this month. Make sure to save next time!';
-            } else {
-                resultElement.textContent = `Warning! You have a negative balance of $${Math.abs(balance).toFixed(2)}. You need to cut down on your expenses to meet your savings goal.`;
-            }
-        });
-    </script>
-</body>
-</html>
+            const expenses = parseFloat(document.getElementById('expenses').value
