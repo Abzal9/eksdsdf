@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #555;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .summary {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        footer a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .chart {
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personal Finance Tracker</h1>
+        <p>Plan your future with confidence by managing your money wisely.</p>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#tips">Financial Tips</a>
+    </nav>
+    <div id="about" class="container">
+        <h2 class="section-title">About the Tracker</h2>
+        <p>Managing finances can often feel overwhelming, but it doesn't have to be. This tool is designed to provide a simple and intuitive way to keep track of your income and expenses, helping you make informed decisions about your financial future. Whether you're saving for a rainy day or working towards a specific goal, our tracker is here to support you every step of the way.</p>
+    </div>
+    <div id="features" class="container">
+        <h2 class="section-title">Features</h2>
+        <ul>
+            <li>**Budget Management:** Easily record your income and expenses.</li>
+            <li>**Goal Setting:** Track your savings goals and measure progress.</li>
+            <li>**Financial Analytics:** Get insights through interactive charts.</li>
+            <li>**Tips & Advice:** Receive recommendations based on your data.</li>
+        </ul>
+    </div>
+    <div id="calculator" class="container">
+        <h2 class="section-title">Budget Calculator</h2>
+        <form id="financeForm">
+            <div class="form-group">
+                <label for="income">Income:</label>
+                <input type="number" id="income" placeholder="Enter your monthly income" required>
+            </div>
+            <div class="form-group">
+                <label for="expenses">Expenses:</label>
+                <input type="number" id="expenses" placeholder="Enter your monthly expenses" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div class="summary" id="summary">
+            <h3>Summary</h3>
+            <p id="result">Your results will appear here.</p>
+        </div>
+        <div class="chart" id="chart">
+            <canvas id="financeChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <div id="tips" class="container">
+        <h2 class="section-title">Financial Tips</h2>
+        <p>Here are some tips to help you manage your finances effectively:</p>
+        <ul>
+            <li>Create a budget and stick to it.</li>
+            <li>Set aside a portion of your income as savings each month.</li>
+            <li>Track your spending habits to identify unnecessary expenses.</li>
+            <li>Invest in your future by exploring safe investment options.</li>
+            <li>Emergency funds can save you from unexpected financial crises.</li>
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; 2024 Personal Finance Tracker. All rights reserved.</p>
+        <p>Created by random initials: <b>A.B., C.D., E.F.</b></p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+    <script>
+        // Budget Calculator Script
+        document.getElementById('financeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const income = parseFloat(document.getElementById('income').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const balance = income - expenses;
+            const resultElement = document.getElementById('result');
+
+            if (balance > 0) {
+                resultElement.textContent = `Great! You have a positive balance of $${balance.toFixed(2)}.`;
+            } else if (balance === 0) {
+                resultElement.textContent = 'You broke even this month.';
+            } else {
+                resultElement.textContent = `Warning! You have a negative balance of $${Math.abs(balance).toFixed(2)}.`;
+            }
+        });
+    </script>
+</body>
+</html>
