@@ -3,105 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Calculator Website</title>
+    <title>Financial Tracker</title>
     <style>
-        /* Основной стиль для сайта */
+        /* Основной стиль */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        header {
+            background-color: #00bcd4;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             padding: 20px;
         }
 
-        header {
-            width: 100%;
-            background-color: #00bcd4;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
-        }
-
-        /* Стиль для калькулятора */
-        .calculator {
+        .calculator, .form-container, .history, .advice {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 320px;
-            text-align: center;
+            margin: 10px;
+            padding: 20px;
+            width: 80%;
+            border-radius: 15px;
         }
-        .calculator input {
+
+        .calculator input, .form-container input {
             width: 100%;
-            height: 60px;
-            text-align: right;
-            font-size: 28px;
-            margin-bottom: 20px;
             padding: 10px;
-            box-sizing: border-box;
+            margin: 10px 0;
+            font-size: 18px;
             border: 2px solid #00bcd4;
             border-radius: 10px;
-            background-color: #f1f1f1;
-            color: #333;
         }
-        .calculator button {
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
+
+        .calculator button, .form-container button {
+            width: 48%;
+            padding: 10px;
+            font-size: 18px;
             margin: 5px;
             border: none;
             border-radius: 10px;
-            background-color: #f1f1f1;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
-        .calculator button:hover {
-            background-color: #e0e0e0;
-        }
-        .calculator button:active {
-            background-color: #c0c0c0;
-        }
-        .calculator button.clear {
-            background-color: #ff1744;
-            color: white;
-        }
-        .calculator button.equal {
+
+        .calculator button {
             background-color: #4caf50;
             color: white;
         }
-        .calculator button.operator {
-            background-color: #ff9800;
+
+        .form-container button {
+            background-color: #00bcd4;
             color: white;
-        }
-        .calculator button.square-root {
-            background-color: #673ab7;
-            color: white;
-        }
-
-        /* Стиль для инструкций и истории */
-        .instructions, .history {
-            width: 320px;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .instructions h2, .history h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .instructions p, .history p {
-            font-size: 18px;
         }
 
         .history ul {
@@ -116,156 +80,154 @@
             border-radius: 5px;
         }
 
-        /* Стиль для переключения темы */
-        .theme-toggle {
+        .advice {
+            background-color: #fff;
+            padding: 15px;
+            width: 80%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #00bcd4;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        /* Тема темного фона */
-        .dark-theme {
-            background-color: #212121;
-            color: white;
+        .advice h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
-        .dark-theme .calculator {
-            background-color: #333;
-        }
-        .dark-theme .calculator input {
-            background-color: #555;
-            color: white;
-        }
-        .dark-theme .calculator button {
-            background-color: #444;
-            color: white;
-        }
-        .dark-theme .theme-toggle {
-            background-color: #673ab7;
+
+        .advice p {
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-    <header>Advanced Calculator</header>
+    <header>Financial Tracker</header>
 
-    <div class="calculator">
-        <input type="text" id="display" disabled>
-        <div>
-            <button onclick="appendValue(7)">7</button>
-            <button onclick="appendValue(8)">8</button>
-            <button onclick="appendValue(9)">9</button>
-            <button onclick="appendOperator('+')" class="operator">+</button>
+    <div class="container">
+        <!-- Форма для ввода доходов и расходов -->
+        <div class="form-container">
+            <h2>Enter Your Income and Expenses</h2>
+            <input type="number" id="income" placeholder="Enter your income" />
+            <input type="number" id="expense" placeholder="Enter your expense" />
+            <button onclick="addTransaction()">Add Transaction</button>
         </div>
-        <div>
-            <button onclick="appendValue(4)">4</button>
-            <button onclick="appendValue(5)">5</button>
-            <button onclick="appendValue(6)">6</button>
-            <button onclick="appendOperator('-')" class="operator">-</button>
+
+        <!-- История расходов и доходов -->
+        <div class="history">
+            <h2>Transaction History</h2>
+            <ul id="history-list">
+                <!-- История будет отображаться здесь -->
+            </ul>
         </div>
-        <div>
-            <button onclick="appendValue(1)">1</button>
-            <button onclick="appendValue(2)">2</button>
-            <button onclick="appendValue(3)">3</button>
-            <button onclick="appendOperator('*')" class="operator">*</button>
+
+        <!-- Калькулятор -->
+        <div class="calculator">
+            <h2>Simple Calculator</h2>
+            <input type="text" id="calc-display" disabled />
+            <div>
+                <button onclick="appendCalcValue(7)">7</button>
+                <button onclick="appendCalcValue(8)">8</button>
+                <button onclick="appendCalcValue(9)">9</button>
+                <button onclick="appendOperator('+')">+</button>
+            </div>
+            <div>
+                <button onclick="appendCalcValue(4)">4</button>
+                <button onclick="appendCalcValue(5)">5</button>
+                <button onclick="appendCalcValue(6)">6</button>
+                <button onclick="appendOperator('-')">-</button>
+            </div>
+            <div>
+                <button onclick="appendCalcValue(1)">1</button>
+                <button onclick="appendCalcValue(2)">2</button>
+                <button onclick="appendCalcValue(3)">3</button>
+                <button onclick="appendOperator('*')">*</button>
+            </div>
+            <div>
+                <button onclick="appendCalcValue(0)">0</button>
+                <button onclick="appendDecimal()">.</button>
+                <button onclick="clearCalcDisplay()">C</button>
+                <button onclick="appendOperator('/')">/</button>
+            </div>
+            <div>
+                <button onclick="calculateCalcResult()">=</button>
+            </div>
         </div>
-        <div>
-            <button onclick="appendValue(0)">0</button>
-            <button onclick="appendDecimal()">.</button>
-            <button onclick="clearDisplay()" class="clear">C</button>
-            <button onclick="appendOperator('/')" class="operator">/</button>
-        </div>
-        <div>
-            <button onclick="calculateResult()" class="equal">=</button>
-            <button onclick="calculateSquareRoot()" class="square-root">√</button>
+
+        <!-- Советы по управлению финансами -->
+        <div class="advice">
+            <h2>Financial Tips</h2>
+            <p>1. Regularly track your income and expenses to stay on top of your finances.</p>
+            <p>2. Create a budget and stick to it to avoid unnecessary spending.</p>
+            <p>3. Set aside savings for emergencies to protect yourself from unexpected expenses.</p>
+            <p>4. Reduce debt by paying off high-interest loans first.</p>
+            <p>5. Invest in your future by saving for retirement early.</p>
         </div>
     </div>
-
-    <div class="instructions">
-        <h2>Calculator Instructions</h2>
-        <p>This calculator supports basic arithmetic operations (+, -, *, /) and decimal numbers. You can also calculate square roots with the √ button.</p>
-        <p>Use the C button to clear the input. Click the "=" button to get the result of your calculation.</p>
-    </div>
-
-    <div class="history">
-        <h2>Calculation History</h2>
-        <ul id="history-list">
-            <!-- History will be populated here -->
-        </ul>
-    </div>
-
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Theme</button>
 
     <script>
         let history = [];
+        let balance = 0;
 
-        function appendValue(value) {
-            document.getElementById("display").value += value;
+        // Добавить транзакцию
+        function addTransaction() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const expense = parseFloat(document.getElementById('expense').value) || 0;
+
+            balance += income - expense;
+            history.push({ income, expense, balance });
+
+            document.getElementById('income').value = '';
+            document.getElementById('expense').value = '';
+
+            updateHistory();
+            updateBalance();
+        }
+
+        // Обновить историю
+        function updateHistory() {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            history.forEach(transaction => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Income: $${transaction.income} | Expense: $${transaction.expense} | Balance: $${transaction.balance}`;
+                historyList.appendChild(listItem);
+            });
+        }
+
+        // Обновить баланс
+        function updateBalance() {
+            const balanceDisplay = document.createElement('div');
+            balanceDisplay.textContent = `Current Balance: $${balance}`;
+            document.body.appendChild(balanceDisplay);
+        }
+
+        // Функции для калькулятора
+        function appendCalcValue(value) {
+            document.getElementById('calc-display').value += value;
         }
 
         function appendOperator(operator) {
-            const display = document.getElementById("display");
-            const lastChar = display.value.charAt(display.value.length - 1);
-            if (['+', '-', '*', '/'].includes(lastChar)) {
-                display.value = display.value.slice(0, -1);
-            }
-            display.value += operator;
+            document.getElementById('calc-display').value += operator;
         }
 
         function appendDecimal() {
-            const display = document.getElementById("display");
+            const display = document.getElementById('calc-display');
             if (!display.value.includes('.')) {
                 display.value += '.';
             }
         }
 
-        function clearDisplay() {
-            document.getElementById("display").value = "";
+        function clearCalcDisplay() {
+            document.getElementById('calc-display').value = '';
         }
 
-        function calculateResult() {
+        function calculateCalcResult() {
             try {
-                const result = eval(document.getElementById("display").value);
-                document.getElementById("display").value = result;
-                addHistory(document.getElementById("display").value);
+                const result = eval(document.getElementById('calc-display').value);
+                document.getElementById('calc-display').value = result;
             } catch (e) {
-                document.getElementById("display").value = "Error";
+                document.getElementById('calc-display').value = 'Error';
             }
-        }
-
-        function calculateSquareRoot() {
-            const display = document.getElementById("display");
-            const value = parseFloat(display.value);
-            if (value >= 0) {
-                const result = Math.sqrt(value);
-                document.getElementById("display").value = result;
-                addHistory(display.value + " √ = " + result);
-            } else {
-                document.getElementById("display").value = "Error";
-            }
-        }
-
-        function addHistory(calculation) {
-            history.push(calculation);
-            if (history.length > 5) history.shift(); // Keep only last 5 calculations
-            updateHistory();
-        }
-
-        function updateHistory() {
-            const historyList = document.getElementById("history-list");
-            historyList.innerHTML = "";
-            history.forEach(item => {
-                const listItem = document.createElement("li");
-                listItem.textContent = item;
-                historyList.appendChild(listItem);
-            });
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle("dark-theme");
         }
     </script>
 
