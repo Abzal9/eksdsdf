@@ -5,33 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Finance Tracker</title>
     <style>
-        /* General Styles */
+        :root {
+            --background-light: #f4f4f9;
+            --text-light: #333;
+            --header-light: #333;
+            --nav-light: #555;
+            --link-light: #1e90ff;
+
+            --background-dark: #1e1e2f;
+            --text-dark: #f4f4f9;
+            --header-dark: #111;
+            --nav-dark: #222;
+            --link-dark: #00aaff;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        body.dark {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
         header {
-            background: #333;
+            background: var(--header-light);
             color: #fff;
             padding: 1rem 0;
             text-align: center;
         }
+
+        body.dark header {
+            background: var(--header-dark);
+        }
+
         nav {
-            background: #555;
+            background: var(--nav-light);
             padding: 1rem;
             text-align: center;
         }
+
+        body.dark nav {
+            background: var(--nav-dark);
+        }
+
         nav a {
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
             font-weight: bold;
         }
+
         nav a:hover {
             text-decoration: underline;
         }
+
         .container {
             padding: 2rem;
             max-width: 1000px;
@@ -40,59 +73,40 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
+            transition: background-color 0.3s;
         }
-        .section-title {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #333;
+
+        body.dark .container {
+            background: #2a2a3f;
         }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .summary {
-            margin-top: 2rem;
-            text-align: center;
-        }
+
         footer {
-            background: #333;
+            background: var(--header-light);
             color: #fff;
             text-align: center;
             padding: 1rem 0;
         }
-        footer a {
-            color: #1e90ff;
-            text-decoration: none;
+
+        body.dark footer {
+            background: var(--header-dark);
         }
-        footer a:hover {
-            text-decoration: underline;
+
+        .theme-switch {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, color 0.3s;
         }
-        .chart {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .advice-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .advice-list li {
-            background-color: #e0f7fa;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .advice-list li:hover {
-            background-color: #b2ebf2;
+
+        body.dark .theme-switch {
+            background: #333;
+            color: #fff;
         }
     </style>
 </head>
@@ -104,92 +118,64 @@
     <nav>
         <a href="#about">About</a>
         <a href="#features">Features</a>
-        <a href="#calculator">Budget Calculator</a>
+        <a href="#calculator">Calculator</a>
         <a href="#tips">Financial Tips</a>
     </nav>
+
     <div id="about" class="container">
-        <h2 class="section-title">About the Tracker</h2>
-        <p>Understanding personal finances and managing them effectively is essential to achieving long-term financial stability. Many people struggle with budgeting, saving, and investing, but these challenges can be overcome with knowledge and a strategic approach.</p>
-        <p><strong>Why Financial Literacy Matters:</strong></p>
-        <p>Financial literacy is the ability to understand and effectively manage your personal finances. It's about making informed decisions that help you achieve your financial goals, from managing daily expenses to planning for the future. Good financial management includes budgeting, saving, investing, and understanding debt and credit. When you are financially literate, you can avoid pitfalls like living paycheck to paycheck, accumulating excessive debt, and missing out on opportunities for growth.</p>
-        
-        <p><strong>Steps to Manage Your Finances Wisely:</strong></p>
+        <h2>About Financial Management</h2>
+        <p>Understanding and managing your finances effectively can lead to financial freedom and peace of mind. Here are some core principles to follow:</p>
         <ul>
-            <li><strong>Create a Budget:</strong> Track your income and expenses to ensure that you're spending less than you earn. Use this insight to adjust your habits and make conscious choices about your spending.</li>
-            <li><strong>Set Financial Goals:</strong> Having clear goals is crucial for motivation. Whether it’s saving for a vacation, buying a home, or preparing for retirement, knowing what you’re working towards helps you stay focused.</li>
-            <li><strong>Build an Emergency Fund:</strong> Life is unpredictable. Building a safety net with 3-6 months of living expenses can help you avoid financial strain in case of emergencies like job loss or unexpected medical costs.</li>
-            <li><strong>Save and Invest:</strong> Start saving early and invest in tools like retirement accounts or investment portfolios. The earlier you start, the more your money can grow thanks to compound interest.</li>
-            <li><strong>Manage Debt:</strong> Avoid accumulating high-interest debt, such as credit card debt. If you have existing debts, prioritize paying them off, especially those with the highest interest rates.</li>
-            <li><strong>Regular Financial Check-ups:</strong> Track your financial progress regularly. This allows you to adjust your budget, reassess your savings goals, and ensure that you’re on the right path.</li>
+            <li>Create a budget to monitor your income and expenses.</li>
+            <li>Save consistently, even if it’s a small amount each month.</li>
+            <li>Invest in opportunities that align with your goals.</li>
+            <li>Stay informed about financial trends and advice.</li>
         </ul>
-        <p>By following these basic principles, you can set yourself up for long-term financial health and stability. This tracker will help you stay organized, track your expenses, and monitor your progress as you work toward achieving your goals.</p>
     </div>
+
     <div id="features" class="container">
-        <h2 class="section-title">Features</h2>
+        <h2>Features</h2>
+        <p>Our platform offers:</p>
         <ul>
-            <li><strong>Budget Management:</strong> Easily record your income and expenses to track how much you’re saving or spending.</li>
-            <li><strong>Goal Setting:</strong> Track your savings goals and measure progress towards important financial milestones like buying a home or going on vacation.</li>
-            <li><strong>Financial Analytics:</strong> Get insights into your spending patterns and income sources through interactive charts.</li>
-            <li><strong>Personalized Financial Tips:</strong> Receive recommendations based on your data to help you improve your financial habits.</li>
+            <li>Income and expense tracking.</li>
+            <li>Interactive financial calculators.</li>
+            <li>Personalized financial tips and insights.</li>
+            <li>Goal tracking and budget analysis.</li>
         </ul>
     </div>
+
     <div id="calculator" class="container">
-        <h2 class="section-title">Budget Calculator</h2>
+        <h2>Budget Calculator</h2>
         <form id="financeForm">
-            <div class="form-group">
-                <label for="income">Income:</label>
-                <input type="number" id="income" placeholder="Enter your monthly income" required>
-            </div>
-            <div class="form-group">
-                <label for="expenses">Expenses:</label>
-                <input type="number" id="expenses" placeholder="Enter your monthly expenses" required>
-            </div>
-            <div class="form-group">
-                <label for="savings">Savings Goal:</label>
-                <input type="number" id="savings" placeholder="Enter your savings goal" required>
-            </div>
+            <label for="income">Income:</label>
+            <input type="number" id="income" placeholder="Enter your monthly income" required><br>
+
+            <label for="expenses">Expenses:</label>
+            <input type="number" id="expenses" placeholder="Enter your monthly expenses" required><br>
+
+            <label for="savings">Savings Goal:</label>
+            <input type="number" id="savings" placeholder="Enter your savings goal" required><br>
+
             <button type="submit">Calculate</button>
         </form>
-        <div class="summary" id="summary">
-            <h3>Summary</h3>
-            <p id="result">Your results will appear here.</p>
-        </div>
-        <div class="chart" id="chart">
-            <canvas id="financeChart" width="400" height="200"></canvas>
-        </div>
+        <div id="result"></div>
     </div>
-    <div id="tips" class="container">
-        <h2 class="section-title">Financial Tips</h2>
-        <p>Here are some tips to help you manage your finances effectively:</p>
-        <ul class="advice-list">
-            <li><strong>Create a detailed budget:</strong> Track your spending by categorizing your expenses. It’s the first step in identifying where you can save.</li>
-            <li><strong>Pay yourself first:</strong> Treat your savings like a recurring expense. Set aside a portion of your income for savings before spending on anything else.</li>
-            <li><strong>Emergency savings fund:</strong> Aim to save 3-6 months' worth of living expenses in case of an emergency.</li>
-            <li><strong>Debt management:</strong> Pay off high-interest debts first (like credit cards) to avoid paying more over time.</li>
-            <li><strong>Track your expenses:</strong> Use an app or tool to monitor your spending. It's easy to overspend when you don't track where your money is going.</li>
-            <li><strong>Invest in your future:</strong> Start contributing to retirement funds as early as possible to benefit from compound interest.</li>
-            <li><strong>Review your finances regularly:</strong> Check your budget and financial goals each month to stay on track.</li>
-            <li><strong>Set specific financial goals:</strong> Whether it’s saving for a trip, building a home, or securing retirement, setting clear goals will motivate you.</li>
-            <li><strong>Use discounts and coupons:</strong> Take advantage of sales, discounts, and online coupon codes to save on everyday purchases.</li>
-            <li><strong>Automate payments:</strong> Set up automatic bill payments to avoid late fees and manage your finances with ease.</li>
-        </ul>
-    </div>
+
     <footer>
         <p>&copy; 2024 Personal Finance Tracker. All rights reserved.</p>
-        <p>Created by: <b>Abzal Zhanakhmet</b></p>
-        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
     </footer>
-    <script>
-        <script>
-    const themeSwitch = document.createElement('div');
-    themeSwitch.className = 'theme-switch';
-    themeSwitch.textContent = 'Switch Theme';
-    document.body.appendChild(themeSwitch);
 
-    themeSwitch.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-    });
-</script>
+    <script>
+        // Theme switch functionality
+        const themeSwitch = document.createElement('div');
+        themeSwitch.className = 'theme-switch';
+        themeSwitch.textContent = 'Switch Theme';
+        document.body.appendChild(themeSwitch);
+
+        themeSwitch.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
         // Budget Calculator Script
         document.getElementById('financeForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -198,9 +184,7 @@
             const savings = parseFloat(document.getElementById('savings').value);
             const balance = income - expenses;
             const resultElement = document.getElementById('result');
-            
             let savingsLeft = savings - balance;
-
             if (balance > 0) {
                 resultElement.textContent = `Great! You have a positive balance of $${balance.toFixed(2)}. You are on track to reach your savings goal with $${savingsLeft.toFixed(2)} remaining.`;
             } else if (balance === 0) {
