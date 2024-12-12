@@ -180,6 +180,16 @@
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
     </footer>
     <script>
+        <script>
+    const themeSwitch = document.createElement('div');
+    themeSwitch.className = 'theme-switch';
+    themeSwitch.textContent = 'Switch Theme';
+    document.body.appendChild(themeSwitch);
+
+    themeSwitch.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+    });
+</script>
         // Budget Calculator Script
         document.getElementById('financeForm').addEventListener('submit', function(e) {
             e.preventDefault();
