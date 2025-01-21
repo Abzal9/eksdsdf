@@ -206,12 +206,11 @@
         document.body.appendChild(themeSwitch);
 
         themeSwitch.addEventListener('click', () => {
-            if (document.body.classList.contains('dark')) {
-                document.body.classList.remove('dark');
-                document.body.classList.add('purple');
-            } else if (document.body.classList.contains('purple')) {
+            if (document.body.classList.contains('purple')) {
                 document.body.classList.remove('purple');
                 document.body.classList.add('dark');
+            } else if (document.body.classList.contains('dark')) {
+                document.body.classList.remove('dark');
             } else {
                 document.body.classList.add('dark');
             }
